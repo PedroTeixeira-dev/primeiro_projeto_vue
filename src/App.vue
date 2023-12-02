@@ -58,11 +58,31 @@ function validaTranferencia() {
 }
 
 function cadastraNome() {
-  if (estado.nomeAInserir.length >= 3){
+  const nomeProcurado = estado.nomeAInserir
+  const encontrado = estado.nomes.includes(nomeProcurado)
+
+  if (estado.nomeAInserir.length >= 3 && !encontrado){
   estado.nomes.push(estado.nomeAInserir)
-} else {
+} else if (encontrado) {
+  alert("O nome ja esta na lista")
+}
+else {
   alert("Digite mais caracteres")
 }
+}
+
+function deletaNome() {
+  const nomeProcurado = estado.nomeAInserir
+  const encontrado = estado.nomes.includes(nomeProcurado)
+
+  if (encontrado){
+    const indice = estado.nomes.indexOf(nomeProcurado)
+    estado.nomes.splice(indice, 1)
+
+    alert(`O nome ${nomeProcurado} foi deletado da lista`)
+  } else {
+    alert("o nome nao se encontra na lista")
+  }
 }
 
 </script>
@@ -121,7 +141,7 @@ Saldo apos transferencia: {{ mostraSaldoFuturo() }} <br/>
 <br/>
 <button @click="cadastraNome()" type="button">Cadastrar nome</button>
 <br/>
-<button type="button">Deletar nomes</button>
+<button @click="deletaNome()" type="button">Deletar nomes</button>
 
 </template>
 
